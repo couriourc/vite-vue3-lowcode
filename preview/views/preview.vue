@@ -8,12 +8,12 @@
 -->
 <template>
   <template v-for="outItem in blocks" :key="outItem._vid">
-    <slot-item :element="outItem" :models="models" :actions="actions" />
+    <slot-item :actions="actions" :element="outItem" :models="models" />
   </template>
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, toRefs, onMounted } from 'vue';
+  import { defineComponent, onMounted, reactive, toRefs } from 'vue';
   import { Toast } from 'vant';
   import router from '../router';
   import SlotItem from './slot-item.vue';
@@ -47,18 +47,26 @@
       if (!state.blocks) {
         router.replace('/');
       }
-
+      const styleNode = document.createElement('style');
       onMounted(() => {
         if (currentPage?.config) {
-          const { bgImage, bgColor } = currentPage.config;
+          const { bgImage, bgColor, css } = currentPage.config;
           const bodyStyleStr = `
-            body {
-                  background-color: ${bgColor};
-                  background-image: url(${bgImage});
-                }
-             `;
+              body {
+                    background-color: ${bgColor};
+                    background-image: url(${bgImage});
+                  }
+               `;
+          console.log(bodyStyleStr);
           document.styleSheets[0].insertRule(bodyStyleStr);
+
+          styleNode.innerHTML = css ?? '';
+          styleNode.setAttribute('type', 'text/css');
+          document.head.appendChild(styleNode);
         }
+      });
+      onUnmounted(() => {
+        styleNode.remove();
       });
 
       return {

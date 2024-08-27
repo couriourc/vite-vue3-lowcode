@@ -3,21 +3,21 @@
     <div class="simulator-editor">
       <div class="simulator-editor-content">
         <DraggableTransitionGroup
-          v-model:drag="drag"
           v-model="currentPage.blocks"
+          v-model:drag="drag"
           class="!min-h-680px"
           draggable=".item-drag"
         >
           <template #item="{ element: outElement }">
             <div
-              class="list-group-item"
-              :data-label="outElement.label"
               :class="{
                 focus: outElement.focus,
                 focusWithChild: outElement.focusWithChild,
                 drag,
                 ['has-slot']: !!Object.keys(outElement.props.slots || {}).length,
               }"
+              :data-label="outElement.label"
+              class="list-group-item"
               @contextmenu.stop.prevent="onContextmenuBlock($event, outElement)"
               @mousedown.stop="selectComp(outElement)"
             >
@@ -38,10 +38,10 @@
                   <SlotItem
                     v-model:children="value.children"
                     v-model:drag="drag"
-                    :slot-key="slotKey"
+                    :delete-comp="deleteComp"
                     :on-contextmenu-block="onContextmenuBlock"
                     :select-comp="selectComp"
-                    :delete-comp="deleteComp"
+                    :slot-key="slotKey"
                   />
                 </template>
               </comp-render>
@@ -56,6 +56,7 @@
 <script lang="tsx" setup>
   import { ref, watchEffect } from 'vue';
   import { cloneDeep } from 'lodash-es';
+  import useHotkey, { HotKey } from 'vue3-hotkey';
   import DraggableTransitionGroup from './draggable-transition-group.vue';
   import CompRender from './comp-render';
   import SlotItem from './slot-item.vue';
@@ -71,12 +72,23 @@
     name: 'SimulatorEditor',
   });
 
-  const { currentPage, setCurrentBlock } = useVisualData();
+  const { currentPage, setCurrentBlock, currentBlock } = useVisualData();
 
   const { globalProperties } = useGlobalProperties();
 
   const drag = ref(false);
-
+  const hotkeys = ref<HotKey[]>([
+    {
+      keys: ['delete'],
+      preventDefault: true,
+      handler() {
+        console.log(currentBlock.value);
+        if (!currentBlock.value) return;
+        deleteComp(currentBlock.value);
+      },
+    },
+  ]);
+  useHotkey(hotkeys.value);
   /**
    * @description 操作当前页面样式表
    */
@@ -250,11 +262,11 @@
 
   .simulator-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
     padding-right: 380px;
-    align-items: center;
-    justify-content: center;
 
     @media (max-width: 1114px) {
       padding-right: 0;
@@ -262,14 +274,14 @@
   }
 
   .simulator-editor {
-    width: 660px;
-    height: 740px;
-    min-width: 660px;
-    padding: 60px 150px 0;
     overflow: hidden auto;
-    background: #fafafa;
-    border-radius: 5px;
     box-sizing: border-box;
+    width: 660px;
+    min-width: 660px;
+    height: 740px;
+    padding: 60px 150px 0;
+    border-radius: 5px;
+    background: #fafafa;
     background-clip: content-box;
     contain: layout;
 

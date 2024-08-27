@@ -1,5 +1,5 @@
 <template>
-  <el-row type="flex" class="header">
+  <el-row class="header" type="flex">
     <!--    左侧logo start-->
     <el-col :span="6" class="flex items-center">
       <div class="logo"></div>
@@ -7,7 +7,7 @@
     </el-col>
     <!--    左侧logo end-->
     <!--    中间操作页面部分 start-->
-    <el-col class="flex items-center" :span="12">
+    <el-col :span="12" class="flex items-center">
       <template v-for="(toolItem, toolIndex) in tools" :key="toolIndex">
         <div :class="[`w-1/${tools.length}`]" class="w-1/9">
           <div
@@ -25,13 +25,13 @@
     <!--    中间操作页面部分 end-->
     <!--    右侧工具栏 start-->
     <el-col :span="6" class="right-tools flex flex-row-reverse items-center">
-      <el-tooltip class="item" effect="dark" content="运行" placement="bottom">
+      <el-tooltip class="item" content="运行" effect="dark" placement="bottom">
         <el-button
-          type="primary"
           :icon="VideoPlay"
-          size="large"
           circle
           class="flex-shrink-0 !p-6px"
+          size="large"
+          type="primary"
           @click="runPreview"
         />
       </el-tooltip>
@@ -40,27 +40,27 @@
       <!--          <img :src="`${BASE_URL}github.svg`" width="40" height="40" alt="" />-->
       <!--        </a>-->
       <!--      </el-tooltip>-->
-      <el-popover placement="bottom" :width="140" trigger="hover">
-        <el-row type="flex" class="row-bg" justify="space-around">
-          <el-col :span="6">
-            <el-tooltip class="item" effect="dark" content="github" placement="bottom">
-              <a href="https://github.com/buqiyuan/vite-vue3-lowcode" target="_blank">
-                <img :src="`${BASE_URL}github.svg`" width="40" height="40" alt="" />
-              </a>
-            </el-tooltip>
-          </el-col>
-          <el-col :span="6">
-            <el-tooltip class="item" effect="dark" content="gitee" placement="bottom">
-              <a href="https://gitee.com/buqiyuan/vite-vue3-lowcode" target="_blank">
-                <img :src="`${BASE_URL}gitee.svg`" width="40" height="40" alt="" />
-              </a>
-            </el-tooltip>
-          </el-col>
-        </el-row>
-        <template #reference>
-          <img :src="`${BASE_URL}github.svg`" width="40" height="40" alt="" />
-        </template>
-      </el-popover>
+      <!--      <el-popover placement="bottom" :width="140" trigger="hover">-->
+      <!--        <el-row type="flex" class="row-bg" justify="space-around">-->
+      <!--          <el-col :span="6">-->
+      <!--            <el-tooltip class="item" effect="dark" content="github" placement="bottom">-->
+      <!--              <a href="https://github.com/buqiyuan/vite-vue3-lowcode" target="_blank">-->
+      <!--                <img :src="`${BASE_URL}github.svg`" width="40" height="40" alt="" />-->
+      <!--              </a>-->
+      <!--            </el-tooltip>-->
+      <!--          </el-col>-->
+      <!--          <el-col :span="6">-->
+      <!--            <el-tooltip class="item" effect="dark" content="gitee" placement="bottom">-->
+      <!--              <a href="https://gitee.com/buqiyuan/vite-vue3-lowcode" target="_blank">-->
+      <!--                <img :src="`${BASE_URL}gitee.svg`" width="40" height="40" alt="" />-->
+      <!--              </a>-->
+      <!--            </el-tooltip>-->
+      <!--          </el-col>-->
+      <!--        </el-row>-->
+      <!--        <template #reference>-->
+      <!--          <img :src="`${BASE_URL}github.svg`" width="40" height="40" alt="" />-->
+      <!--        </template>-->
+      <!--      </el-popover>-->
     </el-col>
     <!--    右侧工具栏 end-->
   </el-row>
@@ -71,8 +71,7 @@
   import { VideoPlay } from '@element-plus/icons-vue';
   import Preview from './preview.vue';
   import { useTools } from './useTools';
-  import { useVisualData, localKey } from '@/visual-editor/hooks/useVisualData';
-  import { BASE_URL } from '@/visual-editor/utils';
+  import { localKey, useVisualData } from '@/visual-editor/hooks/useVisualData';
 
   defineOptions({
     name: 'PageHeader',
@@ -105,8 +104,8 @@
 
     .tool-item {
       .title {
-        margin-top: 4px;
         font-size: 12px;
+        margin-top: 4px;
       }
     }
 

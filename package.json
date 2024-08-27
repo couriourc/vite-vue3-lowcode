@@ -54,6 +54,7 @@
     "vue": "^3.3.4",
     "vue-demi": "^0.14.10",
     "vue-router": "^4.0.16",
+    "vue3-hotkey": "^1.0.6",
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {

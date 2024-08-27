@@ -5,15 +5,15 @@
  * @description：useVisualData
  * @update: 2021/5/6 11:59
  */
-import { reactive, inject, readonly, computed, watch } from 'vue';
+import { computed, inject, reactive, readonly, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { InjectionKey } from 'vue';
 import type {
-  VisualEditorModelValue,
-  VisualEditorBlockData,
-  VisualEditorPage,
   FetchApiItem,
+  VisualEditorBlockData,
   VisualEditorModel,
+  VisualEditorModelValue,
+  VisualEditorPage,
 } from '@/visual-editor/visual-editor.utils';
 
 import { visualConfig } from '@/visual.config';
@@ -43,6 +43,7 @@ export const createNewPage = ({ title = '新页面', path = '/' }) => ({
     keepAlive: false,
   },
   blocks: [],
+  css: '',
 });
 
 const defaultValue: VisualEditorModelValue = {

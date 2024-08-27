@@ -1,5 +1,7 @@
 <!--业务组件-->
-<template>业务组件</template>
+<template>
+  <div> 上传业务组件</div>
+</template>
 
 <script lang="ts">
   import { Upload } from '@element-plus/icons-vue';

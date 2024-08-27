@@ -7,47 +7,43 @@
  * @FilePath: \vite-vue3-lowcode\src\visual-editor\components\right-attribute-panel\components\page-setting\pageSetting.tsx
  */
 import { defineComponent } from 'vue';
-import { ElForm, ElFormItem, ElInput, ElUpload, ElColorPicker, ElSwitch } from 'element-plus';
-import { Plus } from '@element-plus/icons-vue';
-import styles from './styles.module.scss';
+import { ElForm, ElFormItem, ElInput, ElSwitch } from 'element-plus';
+
 import { useVisualData } from '@/visual-editor/hooks/useVisualData';
+import MonacoEditor from '@/visual-editor/components/common/monaco-editor/MonacoEditor';
 
 export const PageSetting = defineComponent({
   setup() {
     const { currentPage } = useVisualData();
 
     const pageConfig = currentPage.value.config;
-
-    const beforeUpload = (file: File) => {
-      console.log(file, '要上传的文件');
-      const fileReader = new FileReader();
-      fileReader.onload = (event) => {
-        pageConfig.bgImage = event.target?.result as string;
-      };
-      fileReader.readAsDataURL(file);
-    };
-
+    const baseCss: string = pageConfig.css ?? '';
     return () => (
       <>
         <ElForm>
           <ElFormItem label="路由切换时缓存本页面">
             <ElSwitch v-model={pageConfig.keepAlive} />
           </ElFormItem>
-          <ElFormItem label="背景颜色">
-            <ElColorPicker v-model={pageConfig.bgColor} />
-          </ElFormItem>
           <ElFormItem label="背景图片">
             <ElInput v-model={pageConfig.bgImage} placeholder={'图片地址'} clearable />
           </ElFormItem>
-          <ElUpload action={''} beforeUpload={beforeUpload} class={styles.upload}>
-            {pageConfig.bgImage ? (
-              <img src={pageConfig.bgImage} />
-            ) : (
-              <el-icon class="uploader-icon">
-                <Plus />
-              </el-icon>
-            )}
-          </ElUpload>
+          <div class={'w-full flex flex-col'}>
+            <h3 class={'text-12px mb-12px'}>自定义样式</h3>
+            <MonacoEditor
+              code={baseCss}
+              onChange={(value) => {
+                pageConfig.css = value;
+              }}
+              options={{
+                lineNumbers: 'off',
+              }}
+              language={'css'}
+              layout={{
+                width: 320,
+                height: 300,
+              }}
+            />
+          </div>
         </ElForm>
       </>
     );

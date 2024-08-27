@@ -28,6 +28,7 @@ const jsonData: VisualEditorModelValue = JSON.parse(
 );
 router.beforeEach((to) => {
   document.title = jsonData?.pages?.[to.path]?.title ?? document.title;
+
   return true;
 });
 

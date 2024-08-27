@@ -1,7 +1,7 @@
 import { inject, provide } from 'vue';
-import type { VisualEditorProps } from './visual-editor.props';
 import type { CSSProperties } from 'vue';
-import type { RequestEnum, ContentTypeEnum } from '@/enums/httpEnum';
+import type { VisualEditorProps } from './visual-editor.props';
+import type { ContentTypeEnum, RequestEnum } from '@/enums/httpEnum';
 import { useDotProp } from '@/visual-editor/hooks/useDotProp';
 import { generateNanoid } from '@/visual-editor/utils';
 
@@ -75,6 +75,8 @@ export type PageConfig = {
   bgColor: string;
   /** 是否缓存当前页面 */
   keepAlive: boolean;
+  /** 额外的 css 配置*/
+  css?: string;
 };
 /**
  * @description 页面对象
@@ -292,6 +294,7 @@ export type ComponentModules = {
   baseWidgets: VisualEditorComponent[]; // 基础组件
   containerComponents: VisualEditorComponent[]; // 容器组件
 };
+
 /**
  * @description 创建编辑器配置
  * @returns {} 返回编辑器注册组件的方法等

@@ -5,9 +5,10 @@
  * @description：MonacoEditor
  * @update: 2021/4/30 0:01
  */
-import { defineComponent, onMounted, PropType, shallowRef, ref, onBeforeUnmount, watch } from 'vue';
+import { defineComponent, onBeforeUnmount, onMounted, PropType, ref, shallowRef, watch } from 'vue';
 import { Monaco } from './monaco';
 import styles from './MonacoEditor.module.scss';
+
 let subscription: Monaco.IDisposable | undefined;
 let preventTriggerChangeEvent = false;
 
@@ -18,6 +19,10 @@ export default defineComponent({
       // 代码
       type: String as PropType<string>,
       required: true,
+    },
+    language: {
+      type: String as PropType<string>,
+      default: () => 'json',
     },
     layout: {
       // 布局
@@ -62,7 +67,7 @@ export default defineComponent({
       editorRef.value = Monaco.editor.create(containerDomRef.value!, {
         value: props.code, // 初始值
         theme: 'vs-dark', // vs, hc-black, or vs-dark
-        language: 'json', // 代码生成语言
+        language: props.language, // 代码生成语言
         formatOnPaste: true, // 当粘贴的时候自动进行一次格式化代码
         tabSize: 2, // tab缩进长度
         minimap: {
