@@ -18,4 +18,4 @@ app.config.globalProperties.$$refs = {};
 window.$$refs = app.config.globalProperties.$$refs;
 // }
 
-app.use(router).mount('#app');
+app.use(router as any).mount('#app');

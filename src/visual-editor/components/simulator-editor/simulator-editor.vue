@@ -1,5 +1,5 @@
 <template>
-  <div class="simulator-container">
+  <div class="simulator-container" @mousedown="deselectComp()">
     <div class="simulator-editor">
       <div class="simulator-editor-content">
         <DraggableTransitionGroup
@@ -19,7 +19,7 @@
                 ['has-slot']: !!Object.keys(outElement.props.slots || {}).length,
               }"
               @contextmenu.stop.prevent="onContextmenuBlock($event, outElement)"
-              @mousedown="selectComp(outElement)"
+              @mousedown.stop="selectComp(outElement)"
             >
               <comp-render
                 :key="outElement._vid"
@@ -155,7 +155,14 @@
       element.focusWithChild = false;
     });
   };
-
+  const deselectComp = () => {
+    setCurrentBlock({} as VisualEditorBlockData);
+    currentPage.value.blocks.forEach((block) => {
+      block.focus = false;
+      block.focusWithChild = false;
+      block.focusWithChild = false;
+    });
+  };
   /**
    * 删除组件
    */

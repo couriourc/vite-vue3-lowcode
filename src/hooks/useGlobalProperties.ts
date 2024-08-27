@@ -15,6 +15,7 @@ interface GlobalProperties {
 }
 
 export const useGlobalProperties = () => {
+  // @ts-ignore
   const globalProperties = getCurrentInstance()!.appContext.config
     .globalProperties as GlobalProperties;
 

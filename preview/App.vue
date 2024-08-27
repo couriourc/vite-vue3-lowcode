@@ -20,7 +20,6 @@
       const jsonData: VisualEditorModelValue = JSON.parse(
         localStorage.getItem(CacheEnum.PAGE_DATA_KEY) as string,
       );
-
       // 不需要缓存的页面
       const notNeedcachePages = Object.keys(jsonData.pages).filter(
         (key) => !jsonData.pages[key].config.keepAlive,

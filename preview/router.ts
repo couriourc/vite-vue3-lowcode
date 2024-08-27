@@ -26,7 +26,6 @@ const router = createRouter({
 const jsonData: VisualEditorModelValue = JSON.parse(
   localStorage.getItem(CacheEnum.PAGE_DATA_KEY) as string,
 );
-
 router.beforeEach((to) => {
   document.title = jsonData?.pages?.[to.path]?.title ?? document.title;
   return true;

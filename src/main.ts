@@ -26,6 +26,6 @@ app.config.globalProperties.$$refs = {};
 // if (import.meta.env.DEV) {
 window.$$refs = app.config.globalProperties.$$refs;
 // }
-app.use(router);
+app.use(router as any);
 // 路由准备完毕再挂载
 router.isReady().then(() => app.mount('#app'));
