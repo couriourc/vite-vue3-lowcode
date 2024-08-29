@@ -1,0 +1,83 @@
+/**
+* @name: index.module
+* @author: 卜启缘
+* @date: 2021/4/28 17:03
+* @description：index.module
+* @update: 2021/4/28 17:03
+*/
+$boxShadow: -2px 0 4px 0 rgb(0 0 0 / 10%);
+
+.drawer {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: visible;
+  width: 390px;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(100%);
+  background-color: white;
+  box-shadow: $boxShadow;
+  contain: layout;
+
+  &.is-open {
+    transform: translateX(0);
+
+    /* .floating-action-btn {
+      transform: translateX(0);
+    } */
+  }
+
+  /* &:hover {
+    .floating-action-btn {
+      transform: translateX(-20px);
+    }
+  } */
+}
+
+.floating-action-btn {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 80px;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(-20px);
+  background: #fff;
+  box-shadow: $boxShadow;
+}
+
+.attrs {
+  position: absolute;
+  overflow-y: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+
+  .tabs {
+    height: 100%;
+
+    :global {
+      .el-tabs__content {
+        overflow-y: auto;
+        height: 100%;
+        padding-bottom: 50px;
+      }
+
+      .el-form-item__label {
+        font-size: 12px;
+      }
+
+      .el-form-item .el-form-item__content {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+  }
+}
