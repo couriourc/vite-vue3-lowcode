@@ -76,7 +76,7 @@ export const AttrEditor = defineComponent({
               >
                 {{
                   reference: () => (
-                    <ElIcon class={'ml-6px'}>
+                    <ElIcon class={'ml-6px cursor-pointer'}>
                       <Warning />
                     </ElIcon>
                   ),

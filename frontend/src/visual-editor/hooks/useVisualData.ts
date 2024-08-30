@@ -222,6 +222,11 @@ export const initVisualData = (id: string) => {
     state.jsonData = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData;
   };
 
+  /*覆盖 models*/
+  const overrideCurrentBlockModel = (model: VisualEditorBlockData['model']) => {
+    state.currentBlock.model = model;
+  };
+
   return {
     visualConfig,
     jsonData: readonly(state.jsonData), // 保护JSONData避免直接修改
@@ -230,6 +235,7 @@ export const initVisualData = (id: string) => {
     apis: computed(() => state.jsonData.actions.fetch.apis),
     models: computed(() => state.jsonData.models),
     overrideProject,
+    overrideCurrentBlockModel,
     incrementFetchApi,
     deleteFetchApi,
     updateFetchApi,

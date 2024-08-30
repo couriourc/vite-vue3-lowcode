@@ -30,7 +30,7 @@ export type VisualEditorBlockData = {
   /** 组件的设计属性 */
   props: Record<string, any>;
   /** 绑定的字段 */
-  model: Record<string, string>;
+  model: Record<string, VisualEditorModel>;
   /** 组件是否可以被拖拽 */
   draggable: boolean;
   /** 是否显示组件样式配置项 */

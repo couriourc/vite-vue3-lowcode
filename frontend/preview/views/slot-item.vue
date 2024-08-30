@@ -98,7 +98,7 @@
               const { options, data: bindData } = apis.find((item) => item.key == handleKey)!;
               // const pramsObj = {};
               try {
-                const res = await request({
+                await request({
                   ...options,
                   headers: {
                     'Content-Type': ContentTypeEnum[options.contentType],

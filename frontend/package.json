@@ -48,6 +48,7 @@
     "eval5": "^1.4.8",
     "handlebars": "^4.7.8",
     "lodash-es": "^4.17.21",
+    "lucide-vue-next": "^0.436.0",
     "mitt": "^3.0.1",
     "monaco-editor": "^0.33.0",
     "mustache": "^4.2.0",
