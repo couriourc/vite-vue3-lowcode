@@ -20,10 +20,9 @@ import { useVisualData } from '@/visual-editor/hooks/useVisualData';
 
 export const PageSetting = defineComponent({
   setup() {
-    const { currentPage, getFetchApis } = useVisualData();
+    const { currentPage, apis } = useVisualData();
 
     const pageConfig = currentPage.value.config;
-    const apis = getFetchApis();
     console.log('apis', apis);
     return () => (
       <>
@@ -33,7 +32,7 @@ export const PageSetting = defineComponent({
           </ElFormItem>
           <ElFormItem label="预加载数据模型">
             <ElSelect>
-              {apis.map((api) => (
+              {apis.value.map((api) => (
                 <ElOption key={api.key} label={api.name} value={api.key}></ElOption>
               ))}
             </ElSelect>

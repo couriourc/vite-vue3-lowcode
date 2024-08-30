@@ -25,6 +25,7 @@
   import request from '../utils/http/request';
   import { ContentTypeEnum } from '../utils/http/httpEnum';
   import { $bus } from '../bus';
+  import { safe } from '../utils';
   import CompRender from './comp-render';
   import type {
     FetchApiItem,
@@ -56,13 +57,6 @@
       const route = useRoute();
 
       // 处理数据，链接 Models
-      const safe = <T extends (...args: any) => any>(fn: T, value?: ReturnType<T>) => {
-        try {
-          return fn();
-        } catch {
-          return value;
-        }
-      };
 
       function handleDataEntity(entity) {
         switch (entity.type) {

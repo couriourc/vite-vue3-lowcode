@@ -151,12 +151,6 @@ export const initVisualData = (id: string) => {
   const incrementFetchApi = (api: FetchApiItem) => {
     state.jsonData.actions.fetch.apis.push(api);
   };
-  /**
-   * @description 获取API接口请求
-   */
-  const getFetchApis = () => {
-    return state.jsonData.actions.fetch.apis;
-  };
 
   /**
    * @description 删除某个API接口
@@ -233,9 +227,10 @@ export const initVisualData = (id: string) => {
     jsonData: readonly(state.jsonData), // 保护JSONData避免直接修改
     currentPage: computed(() => state.currentPage),
     currentBlock: computed(() => state.currentBlock),
+    apis: computed(() => state.jsonData.actions.fetch.apis),
+    models: computed(() => state.jsonData.models),
     overrideProject,
     incrementFetchApi,
-    getFetchApis,
     deleteFetchApi,
     updateFetchApi,
     incrementModel,
